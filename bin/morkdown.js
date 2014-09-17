@@ -80,7 +80,12 @@ me(file, theme, watching).listen(port)
 if (process.env.HOME)
   args.push('--user-data-dir=' + path.join(process.env.HOME, '.md'))
 
-var child = spawn(bin, ['.', port])
+if (/atom-shell/.test(bin)) {
+  var atom_root = path.join(__dirname, '..')
+  args = [atom_root, port]
+}
+
+var child = spawn(bin, args)
 
 child
   .on('exit', process.exit.bind(process, 0))
