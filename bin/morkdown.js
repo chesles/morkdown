@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var me     = require('..')
+var me     = require('../lib/server')
   , spawn  = require('child_process').spawn
   , os     = require('os')
   , fs     = require('fs')
@@ -29,7 +29,8 @@ var me     = require('..')
       , '/opt/homebrew-cask/Caskroom/google-chrome/latest/Google Chrome.app/Contents/MacOS/Google Chrome'
     ]
   , linuxBin = [
-        '/usr/bin/google-chrome'
+        '/usr/bin/atom-shell'
+      , '/usr/bin/google-chrome'
       , '/usr/bin/chromium-browser'
       , '/usr/bin/chromium'
     ]
@@ -79,6 +80,12 @@ me(file, theme, watching).listen(port)
 if (process.env.HOME)
   args.push('--user-data-dir=' + path.join(process.env.HOME, '.md'))
 
-spawn(bin, args)
+var child = spawn(bin, ['.', port])
+
+child
   .on('exit', process.exit.bind(process, 0))
   .stderr.pipe(process.stderr)
+
+process.on('exit', function() {
+  child.kill()
+})
