@@ -81,7 +81,7 @@ if (process.env.HOME)
   args.push('--user-data-dir=' + path.join(process.env.HOME, '.md'))
 
 if (/atom-shell/.test(bin)) {
-  var atom_root = path.join(__dirname, '..')
+  var atom_root = path.join(__dirname, '..', 'atom-shell')
   args = [atom_root, port]
 }
 

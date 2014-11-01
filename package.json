@@ -2,7 +2,7 @@
   "name": "morkdown",
   "version": "2.4.1",
   "description": "A markdown editor built on Chrome & Node",
-  "main": "lib/shell.js",
+  "main": "lib/server.js",
   "dependencies": {
     "delayed": "~0.0.0",
     "concat-stream": "~1.0.1",
